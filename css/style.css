@@ -2,25 +2,26 @@ html {
 
 }
 body {
-    background-color: #f9f4d5;
-    color: #491118;
-    font-family: "forma-djr-mono", sans-serif;
+    background-color: #fdead2;
+    color: #ec4342;
+    font-family: "config-variable", sans-serif;
+    font-variation-settings: "slnt" 0, "wght" 100, "wdth" 50;;
     font-weight: 400;
     font-style: normal;
 }
 a {
-    color: #491118;
+    color: #ec4342;
     text-decoration: none;
 }
     a:visited {
-        color: #491118;
+        color: #ec4342;
     }
     a:hover {
-        color: #b2c6f9;
+        color: #fdead2;
     }
 }
 h1, h2, h3 {
-    font-family: "cofo-raffine", sans-serif;
+    font-family: "config-variable", sans-serif;
     font-weight: 600;
     font-style: normal;
 }
