@@ -1,43 +1,51 @@
-html {
+html {}
 
-}
 body {
     background-color: #fdead2;
     color: #ec4342;
     font-family: "config-variable", sans-serif;
-    font-variation-settings: "slnt" 0, "wght" 100, "wdth" 50;;
+    font-variation-settings: "slnt" 0, "wght" 100, "wdth" 50;
     font-weight: 400;
     font-style: normal;
 }
+
 a {
     color: #ec4342;
     text-decoration: none;
 }
-    a:visited {
-        color: #ec4342;
-    }
-    a:hover {
-        color: #fdead2;
-    }
+
+a:visited {
+    color: #ec4342;
 }
-h1, h2, h3 {
+
+a:hover {
+    color: #fdead2;
+}
+
+h1,
+h2,
+h3 {
     font-family: "config-variable", sans-serif;
     font-weight: 600;
     font-style: normal;
 }
+
 h1 {
     text-align: center;
     font-size: 2em;
 }
+
 p {
     font-size: 1.2em;
 }
+
 main {
     width: 80%;
     margin: 0 auto;
     min-width: 320px;
     max-width: 1640px;
 }
+
 nav a {
     width: 33.33%;
 }
