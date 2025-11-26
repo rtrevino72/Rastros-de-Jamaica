@@ -1,51 +1,244 @@
-html {}
+:root {
+  --red: #ec4342;
+  --cream: #fdead2;
+  --text-dark: #1b1b1b;
+  --text-light: #fff7f0;
+  --transition-speed: 0.6s;
+}
 
+/* El color de fondo cambia según data-theme en el body */
 body {
-    background-color: #fdead2;
-    color: #ec4342;
-    font-family: "config-variable", sans-serif;
-    font-variation-settings: "slnt" 0, "wght" 100, "wdth" 50;
-    font-weight: 400;
-    font-style: normal;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: var(--red);
+  color: var(--text-light);
+  transition: background-color var(--transition-speed) ease,
+    color var(--transition-speed) ease;
 }
 
-a {
-    color: #ec4342;
-    text-decoration: none;
+/* Tema rojo */
+body[data-theme="red"] {
+  background-color: var(--red);
+  color: var(--text-light);
 }
 
-a:visited {
-    color: #ec4342;
+/* Tema crema */
+body[data-theme="cream"] {
+  background-color: var(--cream);
+  color: var(--text-dark);
 }
 
-a:hover {
-    color: #fdead2;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-h1,
-h2,
-h3 {
-    font-family: "config-variable", sans-serif;
-    font-weight: 600;
-    font-style: normal;
+/* Layout general: left fixed, right scroll */
+.layout {
+  display: flex;
+  min-height: 100vh;
 }
 
-h1 {
-    text-align: center;
-    font-size: 2em;
+/* Sidebar fija (tipo Driftime, un lado fijo) */
+.sidebar {
+  width: 30%;
+  min-width: 260px;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100vh;
+  padding: 2rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-p {
-    font-size: 1.2em;
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 }
 
-main {
-    width: 80%;
-    margin: 0 auto;
-    min-width: 320px;
-    max-width: 1640px;
+.logo {
+  font-size: 1.6rem;
+  margin: 0 0 0.5rem;
 }
 
-nav a {
-    width: 33.33%;
+.tagline {
+  margin: 0 0 2rem;
+  font-size: 0.95rem;
+  max-width: 20rem;
+  line-height: 1.4;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.nav a {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.nav a:hover {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+.small-note {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+/* Lado que hace scroll */
+.content {
+  flex: 1;
+}
+
+/* Secciones */
+.section {
+  padding: 4rem 8vw;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.section-inner {
+  max-width: 900px;
+}
+
+.section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.section p {
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+/* HERO con fotos apiladas */
+#intro .section-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
+  gap: 3rem;
+  align-items: center;
+}
+
+.intro-text p {
+  max-width: 30rem;
+}
+
+/* Stack de fotos tipo Bennett & Clive */
+.photo-stack {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  height: 320px;
+  margin: 0 auto;
+}
+
+.photo-card {
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.22);
+  transform-origin: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Posiciones “apiladas” */
+.photo-1 {
+  top: 12%;
+  left: 0;
+  transform: rotate(-8deg);
+}
+.photo-2 {
+  top: 0;
+  right: 0;
+  transform: rotate(6deg);
+}
+.photo-3 {
+  bottom: -4%;
+  left: 18%;
+  width: 64%;
+  height: 64%;
+  transform: rotate(-2deg);
+}
+
+/* Hover sutil en el stack */
+.photo-stack:hover .photo-card {
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+.photo-stack:hover .photo-1 {
+  transform: rotate(-10deg) translateY(-4px);
+}
+.photo-stack:hover .photo-2 {
+  transform: rotate(8deg) translateY(-4px);
+}
+.photo-stack:hover .photo-3 {
+  transform: rotate(-3deg) translateY(-4px);
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .sidebar-inner {
+    height: auto;
+    gap: 1.5rem;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  #intro .section-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: 3rem 1.5rem;
+  }
+
+  .photo-stack {
+    max-width: 360px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .section h2 {
+    font-size: 1.6rem;
+  }
 }

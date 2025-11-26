@@ -71,7 +71,6 @@ h1 {
 
 .jamaica-title {
     font-family: var(--font-jamaica);
-    font-size: 48px;
     color: var(--text-color);
     font-weight: 100;
     position: relative;
@@ -81,6 +80,7 @@ h1 {
     text-align: center;
     font-size: 10vw;
     text-shadow: 3px 5px 0px var(--text-color);
+    z-index: 0;
 }
 
 .jamaica-title::before {
@@ -109,8 +109,14 @@ h1 {
     color: var(--bg-color);
     font-weight: 100;
     text-shadow: none;
+    z-index: 1;
 }
-
+.red-title.jamaica-title {
+    color: #ec4342; 
+}
+.red-title.jamaica-title::before {
+    color: #aa342f;
+}
 h2 {
     font-size: 36px;
     color: var(--text-color);
