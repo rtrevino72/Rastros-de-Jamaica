@@ -4,9 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rastros de Jamaica</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
   <link rel="stylesheet" href="https://use.typekit.net/yvg8sdt.css">
   <link rel="stylesheet" href="css/style.css" />
+   <link rel="stylesheet" href="css/galeria.css" />
 </head>
 
 <body data-theme="rojo">
@@ -45,6 +46,11 @@
 <section id="intro" class="section" data-theme="rojo">
   <div class="section-inner">
     <div class="intro-text">
+        <div class="title-container">
+            <div class="title regular">Titulo</div>
+             <div class="title flores">Titulo</div>
+              <div class="title sombra">Titulo</div>
+        </div>
       <h2 class="jamaica-title jamaica-title--rojo" data-text="Rastros de Jamaica">
         Rastros de Jamaica
       </h2>
@@ -231,6 +237,23 @@
     </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="script.js" defer></script>
+    <!-- Initialize Swiper -->
+  <script>
+    var swiper = new Swiper(".mySwiper", {
+      slidesPerView: 1,
+      spaceBetween: 30,
+      loop: true,
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
 </body>
 </html>
