@@ -1,51 +1,294 @@
-html {}
+@font-face {
+  font-family: "JAMAICA TS Base";
+  src: url("JAMAICATS-Base.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JAMAICA TS Flores";
+  src: url("JAMAICATS-Flores.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JAMAICA TS Sombra";
+  src: url("JAMAICATS-Sombra.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --rojo: #ec4342;
+  --crema: #fdead2;
+  --transition-speed: 0.6s;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 body {
-    background-color: #fdead2;
-    color: #ec4342;
-    font-family: "config-variable", sans-serif;
-    font-variation-settings: "slnt" 0, "wght" 100, "wdth" 50;
-    font-weight: 400;
-    font-style: normal;
+  margin: 0;
+  font-family: "config-variable", sans-serif;
+  font-variation-settings: "wdth" 100, "wght" 500, "slnt" 0;
+  background-color: var(--rojo);
+  transition:
+    background-color var(--transition-speed) ease,
+    color var(--transition-speed) ease;
 }
 
-a {
-    color: #ec4342;
-    text-decoration: none;
+body[data-theme="rojo"] {
+  background-color: var(--rojo);
+  color: #fdead2; 
 }
 
-a:visited {
-    color: #ec4342;
+body[data-theme="crema"] {
+  background-color: var(--crema);
+  color: #ec4342; 
 }
 
-a:hover {
-    color: #fdead2;
+body[data-theme="rojo"] .logo {
+  color: #fdead2;
 }
 
-h1,
-h2,
-h3 {
-    font-family: "config-variable", sans-serif;
-    font-weight: 600;
-    font-style: normal;
+body[data-theme="crema"] .logo {
+  color: #ec4342;
 }
 
-h1 {
-    text-align: center;
-    font-size: 2em;
+/* SCROLL DE LADO */
+.layout {
+  display: flex;
+  min-height: 100vh;
 }
 
-p {
-    font-size: 1.2em;
+.sidebar {
+  width: 30%;
+  min-width: 260px;
+  position: sticky;
+  top: 0;
+  align-self: flex-start;
+  height: 100vh;
+  padding: 2rem;
+  border-right: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-main {
-    width: 80%;
-    margin: 0 auto;
-    min-width: 320px;
-    max-width: 1640px;
+.sidebar-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 }
 
-nav a {
-    width: 33.33%;
+.content {
+  flex: 1;
+}
+
+.logo {
+  margin: 0 0 2rem;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+body.nav-visible .nav {
+  opacity: 1;
+  pointer-events: auto;
+}
+.nav a {
+  font-size: 0.9rem;
+  text-decoration: none;
+  color: inherit;           
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0.25rem 0;
+  opacity: 0.8;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav a:hover {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+
+.small-note {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.section {
+  padding: 6rem 8vw;
+  min-height: 160vh;       
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+
+.section-inner {
+  max-width: 900px;
+  width: 100%;
+  padding-top: 4rem; 
+}
+
+.section-inner p:first-of-type {
+  margin-top: 45vh;
+}
+
+
+.section p {
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+#intro .section-inner {
+  display: block;
+}
+
+.intro-text p {
+  max-width: 30rem;
+}
+
+
+.jamaica-title {
+  font-family: "JAMAICA TS Base", sans-serif;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  line-height: 1;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin-bottom: 6rem;
+}
+
+.jamaica-title--rojo {
+  color: #fdead2;
+}
+
+.jamaica-title--crema {
+  color: #ec4342;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .sidebar-inner {
+    height: auto;
+    gap: 1.5rem;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .section {
+    padding: 3rem 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .section h2 {
+    font-size: 1.6rem;
+  }
+}
+
+
+.logo-icon {
+  width: 180px;
+  height: 180px;
+  background-color: currentColor;
+  mask: url("../img/LOGO_JAMAICA.svg") no-repeat center;
+  mask-size: contain;
+  -webkit-mask: url("../img/LOGO_JAMAICA.svg") no-repeat center;
+  -webkit-mask-size: contain;
+}
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  overflow: hidden;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.intro-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    filter: blur(6px);
+}
+
+body.video-loaded .intro-video {
+    opacity: 1;
+}
+
+.intro-logo,
+.intro-hint {
+  position: relative;
+  z-index: 1;
+}
+
+.intro-logo .logo-icon {
+  width: 260px;
+  height: 260px;
+}
+
+.intro-hint {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+body.intro-finished .intro-overlay {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.96);
 }
