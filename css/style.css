@@ -25,8 +25,6 @@
 :root {
   --rojo: #ec4342;
   --crema: #fdead2;
-  --texto-oscuro: #1b1b1b;
-  --texto-claro: #fff7f0;
   --transition-speed: 0.6s;
 }
 
@@ -138,21 +136,25 @@ body.nav-visible .nav {
 }
 
 .section {
-  padding: 4rem 8vw;
-  min-height: 80vh;
+  padding: 6rem 8vw;
+  min-height: 160vh;       
   display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
 }
+
 
 .section-inner {
   max-width: 900px;
+  width: 100%;
+  padding-top: 4rem; 
 }
 
-.section h2 {
-  margin-top: 0;
-  margin-bottom: 1rem;
-  font-size: 2rem;
+.section-inner p:first-of-type {
+  margin-top: 45vh;
 }
+
 
 .section p {
   line-height: 1.5;
@@ -167,20 +169,16 @@ body.nav-visible .nav {
   max-width: 30rem;
 }
 
-.intro-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: 3rem;
-  align-items: center;
-}
 
-/* TITULOS */
 .jamaica-title {
   font-family: "JAMAICA TS Base", sans-serif;
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(3.5rem, 8vw, 6rem);
   line-height: 1;
-  letter-spacing: 0.05em;
   text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  display: block;
+  margin-bottom: 6rem;
 }
 
 .jamaica-title--rojo {
@@ -229,7 +227,7 @@ body.nav-visible .nav {
   }
 }
 
-/* LOGO */
+
 .logo-icon {
   width: 180px;
   height: 180px;
@@ -238,4 +236,59 @@ body.nav-visible .nav {
   mask-size: contain;
   -webkit-mask: url("../img/LOGO_JAMAICA.svg") no-repeat center;
   -webkit-mask-size: contain;
+}
+
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  overflow: hidden;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.intro-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+    filter: blur(6px);
+}
+
+body.video-loaded .intro-video {
+    opacity: 1;
+}
+
+.intro-logo,
+.intro-hint {
+  position: relative;
+  z-index: 1;
+}
+
+.intro-logo .logo-icon {
+  width: 260px;
+  height: 260px;
+}
+
+.intro-hint {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.9;
+}
+
+body.intro-finished .intro-overlay {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.96);
 }
