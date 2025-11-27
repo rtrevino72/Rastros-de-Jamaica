@@ -198,14 +198,17 @@ body.nav-visible .nav {
 
 .title.regular {
     position: relative;
-    font-family: "JAMAICA TS Sombra";
+    font-family: "JAMAICA TS Base";
+    font-size: clamp(3.5rem, 8vw, 6rem);
 }
 .title.flores {
-    font-family: "JAMAICA TS Sombra";
+    font-family: "JAMAICA TS Flores";
+    font-size: clamp(3.5rem, 8vw, 6rem);
 }
 
 .title.sombra {
     font-family: "JAMAICA TS Sombra";
+    font-size: clamp(3.5rem, 8vw, 6rem);
 }
 .jamaica-title--rojo {
   color: #fdead2;
@@ -317,4 +320,25 @@ body.intro-finished .intro-overlay {
   opacity: 0;
   pointer-events: none;
   transform: scale(0.96);
+}
+
+
+body[data-theme="rojo"] .title.regular {
+  color: #fdead2;  
+}
+
+body[data-theme="rojo"] .title.flores,
+body[data-theme="rojo"] .title.sombra {
+  color: #efd5bb;  
+}
+
+
+
+body[data-theme="crema"] .title.regular {
+  color: #ec4342;  
+}
+
+body[data-theme="crema"] .title.flores,
+body[data-theme="crema"] .title.sombra {
+  color: #d32a2a; 
 }

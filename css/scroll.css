@@ -1,7 +1,7 @@
 :root {
-    --scroll-background: #000;
-    --scroll-foreground: #FFF;
-    --scroll-background-over: #888888;
+    --scroll-background: #ec4342;
+    --scroll-foreground: #fdead2;
+    --scroll-background-over: #efd5bb;
     --scroll-size: 10px;
 }
 
@@ -13,10 +13,12 @@
 
 ::-webkit-scrollbar-track {
     background-color: var(--scroll-background);
+    border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--scroll-foreground);
+    border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
