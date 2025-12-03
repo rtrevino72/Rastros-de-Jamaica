@@ -342,3 +342,16 @@ body[data-theme="crema"] .title.flores,
 body[data-theme="crema"] .title.sombra {
   color: #d32a2a; 
 }
+
+
+.entrevista-subtitulo {
+  font-family: "config-variable", sans-serif;
+  font-variation-settings: "wdth" 100, "wght" 600; 
+  
+  font-size: 1.25rem;        
+  line-height: 1.3;
+  
+  margin: 2rem 0 1rem;      
+  text-transform: uppercase;
+  letter-spacing: 0.05em;    
+}
