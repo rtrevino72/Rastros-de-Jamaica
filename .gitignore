@@ -11,7 +11,7 @@ vendor/
 
 # Node modules (si usas Node.js)
 node_modules/
-
+video/*.mp4
 # Logs
 *.log
 

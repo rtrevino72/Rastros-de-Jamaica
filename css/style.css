@@ -1,4 +1,5 @@
 @import "scroll.css";
+
 @font-face {
   font-family: "JAMAICA TS Base";
   src: url("JAMAICATS-Base.woff2") format("woff2");
@@ -43,16 +44,18 @@ body {
   transition:
     background-color var(--transition-speed) ease,
     color var(--transition-speed) ease;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 body[data-theme="rojo"] {
   background-color: var(--rojo);
-  color: #fdead2; 
+  color: #fdead2;
 }
 
 body[data-theme="crema"] {
   background-color: var(--crema);
-  color: #ec4342; 
+  color: #ec4342;
 }
 
 body[data-theme="rojo"] .logo {
@@ -63,16 +66,32 @@ body[data-theme="crema"] .logo {
   color: #ec4342;
 }
 
+b {
+  font-variation-settings: 'wght' 800, 'wdth' 900;
+}
+i {
+  font-variation-settings: 'slnt' 9;
+}
+video,
+img {
+  width: 100%;
+    border-radius: 10px;
+    max-width: 100%;
+}
+
 /* SCROLL DE LADO */
 .layout {
+  width: 100%;
   display: flex;
   min-height: 100vh;
+  overflow-x: hidden;
+  flex-direction: row;
 }
 
 .sidebar {
   width: 30%;
   min-width: 260px;
-  position: sticky;
+  position: fixed;
   top: 0;
   align-self: flex-start;
   height: 100vh;
@@ -88,7 +107,10 @@ body[data-theme="crema"] .logo {
 }
 
 .content {
-  flex: 1;
+  width: 70%;
+  float: right;
+  position: absolute;
+  right: 0;
 }
 
 .logo {
@@ -111,10 +133,11 @@ body.nav-visible .nav {
   opacity: 1;
   pointer-events: auto;
 }
+
 .nav a {
   font-size: 0.9rem;
   text-decoration: none;
-  color: inherit;           
+  color: inherit;
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -138,18 +161,20 @@ body.nav-visible .nav {
 
 .section {
   padding: 6rem 8vw;
-  min-height: 160vh;       
+  min-height: 160vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
 
-
+#intro {
+  padding: 0;
+}
 .section-inner {
   max-width: 900px;
   width: 100%;
-  padding-top: 4rem; 
+  padding-top: 4rem;
 }
 
 .section-inner p:first-of-type {
@@ -184,32 +209,34 @@ body.nav-visible .nav {
 }
 
 .title-container {
-    position: relative;
-    width: 100%;
-    text-align: center;
+  position: relative;
+  width: 100%;
+  text-align: center;
 }
 
 .title-container .title {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: 0;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 0;
 }
 
 .title.regular {
-    position: relative;
-    font-family: "JAMAICA TS Base";
-    font-size: clamp(3.5rem, 8vw, 6rem);
+  position: relative;
+  font-family: "JAMAICA TS Base";
+  font-size: clamp(3.5rem, 8vw, 6rem);
 }
+
 .title.flores {
-    font-family: "JAMAICA TS Flores";
-    font-size: clamp(3.5rem, 8vw, 6rem);
+  font-family: "JAMAICA TS Flores";
+  font-size: clamp(3.5rem, 8vw, 6rem);
 }
 
 .title.sombra {
-    font-family: "JAMAICA TS Sombra";
-    font-size: clamp(3.5rem, 8vw, 6rem);
+  font-family: "JAMAICA TS Sombra";
+  font-size: clamp(3.5rem, 8vw, 6rem);
 }
+
 .jamaica-title--rojo {
   color: #fdead2;
 }
@@ -283,18 +310,18 @@ body.nav-visible .nav {
 }
 
 .intro-video {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    transition: opacity 1.5s ease;
-    filter: blur(6px);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.5s ease;
+  filter: blur(6px);
 }
 
 body.video-loaded .intro-video {
-    opacity: 1;
+  opacity: 1;
 }
 
 .intro-logo,
@@ -324,34 +351,60 @@ body.intro-finished .intro-overlay {
 
 
 body[data-theme="rojo"] .title.regular {
-  color: #fdead2;  
+  color: #fdead2;
 }
 
 body[data-theme="rojo"] .title.flores,
 body[data-theme="rojo"] .title.sombra {
-  color: #efd5bb;  
+  color: #efd5bb;
 }
 
 
 
 body[data-theme="crema"] .title.regular {
-  color: #ec4342;  
+  color: #ec4342;
 }
 
 body[data-theme="crema"] .title.flores,
 body[data-theme="crema"] .title.sombra {
-  color: #d32a2a; 
+  color: #d32a2a;
 }
 
 
 .entrevista-subtitulo {
   font-family: "config-variable", sans-serif;
-  font-variation-settings: "wdth" 100, "wght" 600; 
-  
-  font-size: 1.25rem;        
+  font-variation-settings: "wdth" 100, "wght" 600;
+
+  font-size: 1.25rem;
   line-height: 1.3;
-  
-  margin: 2rem 0 1rem;      
+
+  margin: 2rem 0 1rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;    
+  letter-spacing: 0.05em;
+}
+
+/* grid columnas */
+.grid {
+  display: flex;
+  gap: 25px;
+}
+.grid .column {
+  width: 50%;
+  float: left;
+}
+
+.grid .left {
+  width: 40%;
+  float: left;
+}
+
+.grid .right {
+  width: 60%;
+  float: left;
+}
+.grid .column h3 {
+  margin-top: 0;
+}
+.grid .column p {
+  margin: 0;
 }

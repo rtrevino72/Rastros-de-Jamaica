@@ -1,31 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-const introVideo = document.querySelector(".intro-video");
+  const introVideo = document.querySelector(".intro-video");
 
-if (introVideo) {
+  if (introVideo) {
     introVideo.addEventListener("loadeddata", () => {
-        document.body.classList.add("video-loaded");
-       
-        // --- Slider de fotos (Swiper) ---
-  const swiper = new Swiper(".mySwiper", {
-    effect: "coverflow",
-    grabCursor: true,
-    centeredSlides: true,
-    slidesPerView: "auto",
-    coverflowEffect: {
-      rotate: 50,
-      stretch: 0,
-      depth: 100,
-      modifier: 1,
-      slideShadows: true,
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
+      document.body.classList.add("video-loaded");
+
+      // --- Slider de fotos (Swiper) ---
+      const swiper = new Swiper(".mySwiper", {
+        effect: "coverflow",
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: "auto",
+        coverflowEffect: {
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
     });
-    });
-}
+  }
 
   const sections = Array.from(document.querySelectorAll("main .section"));
 
@@ -42,6 +42,7 @@ if (introVideo) {
       if (distance < closestDistance) {
         closestDistance = distance;
         closestSection = section;
+        console.log("section closest", section)
       }
     });
 
