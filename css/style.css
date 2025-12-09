@@ -69,16 +69,19 @@ body[data-theme="crema"] .logo {
 b {
   font-variation-settings: 'wght' 650, 'wdth' 900;
 }
+
 i {
   font-variation-settings: 'slnt' 9;
 }
+
 video,
-img, #doc-container {
+img,
+#doc-container {
   width: 100%;
-    border-radius: 10px;
-    max-width: 100%;
-    -webkit-clip-path: inset(1px); 
-    clip-path: inset(1px);
+  border-radius: 10px;
+  max-width: 100%;
+  -webkit-clip-path: inset(1px);
+  clip-path: inset(1px);
 }
 
 /* SCROLL DE LADO */
@@ -173,6 +176,7 @@ body.nav-visible .nav {
 #intro {
   padding: 0;
 }
+
 .section-inner {
   max-width: 900px;
   width: 100%;
@@ -247,43 +251,7 @@ body.nav-visible .nav {
   color: #ec4342;
 }
 
-@media (max-width: 900px) {
-  .layout {
-    flex-direction: column;
-  }
 
-  .sidebar {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  }
-
-  .sidebar-inner {
-    height: auto;
-    gap: 1.5rem;
-  }
-
-  .content {
-    width: 100%;
-  }
-
-  .section {
-    padding: 3rem 1.5rem;
-  }
-}
-
-@media (max-width: 600px) {
-  .section {
-    padding: 2.5rem 1.25rem;
-  }
-
-  .section h2 {
-    font-size: 1.6rem;
-  }
-}
 
 
 .logo-icon {
@@ -391,6 +359,7 @@ body[data-theme="crema"] .title.sombra {
   gap: 25px;
   margin: 15em 0;
 }
+
 .grid .column {
   width: 50%;
   float: left;
@@ -405,49 +374,55 @@ body[data-theme="crema"] .title.sombra {
   width: 70%;
   float: left;
 }
+
 .grid .column h3 {
   margin-top: 0px;
   padding-top: 0;
   line-height: 1em;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
+
 .grid .column p {
   margin: 1em 0;
 }
-.grid .column p:nth-child(1){
+
+.grid .column p:nth-child(1) {
   margin-top: 0;
 }
 
 h3 {
   font-family: "config-variable", sans-serif;
-  font-variation-settings: "wdth" 100, "wght" 600; 
-  font-size: 25px;        
+  font-variation-settings: "wdth" 100, "wght" 600;
+  font-size: 25px;
   line-height: 1.3;
   text-align: right;
-  margin: 2rem 0 1rem;      
+  margin: 2rem 0 1rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em; 
+  letter-spacing: 0.05em;
 }
 
-#doc-container{
+
+#doc-container {
   position: relative;
 }
 
-#doc-container img{
+#doc-container img {
   position: absolute;
-      height: 100%;
-    width: 100%;
-    object-fit: cover;
-    left: 0;
-    top: 0;
-    transition: transform 1s ease-in-out;
-    cursor: pointer;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  left: 0;
+  top: 0;
+  transition: transform 1s ease-in-out;
+  cursor: pointer;
 }
 
 #doc-container:hover img {
   transform: scale(1.1);
 }
 
-#doc-container iframe{
+#doc-container iframe {
   width: 100%;
   height: auto;
   aspect-ratio: 16 / 9;
@@ -475,4 +450,215 @@ body[data-theme="crema"] hr.divider {
 }
 
 
+/* ===========================
+   TABLET / PANTALLAS MEDIAS
+   =========================== */
+@media (max-width: 900px) {
 
+  /* Layout general */
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: relative;
+    /* deja de ser fija */
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    padding: 1.5rem 1.5rem 1rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .sidebar-inner {
+    height: auto;
+  }
+
+  .content {
+    position: static;
+    /* quita absolute */
+    width: 100%;
+    float: none;
+  }
+
+  /* Secciones */
+  .section {
+    min-height: auto;
+    /* ya no 160vh */
+    padding: 4rem 1.5rem;
+  }
+
+  #intro {
+    padding: 2rem 1.5rem;
+  }
+
+  .section-inner {
+    max-width: 700px;
+    padding-top: 2rem;
+  }
+
+  .section-inner p:first-of-type {
+    margin-top: 2rem;
+    /* sin ese mega espacio */
+  }
+
+  /* Títulos Jamaica un poco más chicos */
+  .jamaica-title,
+  .title.regular,
+  .title.flores,
+  .title.sombra {
+    font-size: clamp(2.4rem, 7vw, 3.4rem);
+    margin-bottom: 3.5rem;
+  }
+
+  /* GRID de texto / entrevistas y mapa */
+  .grid {
+    flex-direction: row;
+    /* sigue siendo dos columnas en tablet */
+    gap: 1.75rem;
+    margin: 6rem 0;
+  }
+
+  .grid .column,
+  .grid .left,
+  .grid .right {
+    float: none;
+    width: 50%;
+  }
+
+  /* h3 un poco más pequeños */
+  h3 {
+    font-size: 20px;
+  }
+
+  /* Galería Swiper */
+  .mySwiper {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+  }
+
+  .mySwiper .swiper-slide {
+    width: 70vw;
+    height: 70vw;
+    max-width: 420px;
+    max-height: 420px;
+  }
+
+  /* Documental: poster + video apilan mejor */
+  #doc-container {
+    margin-top: 2rem;
+  }
+}
+
+
+
+@media (max-width: 900px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: relative;      
+    width: 100%;
+    min-width: auto;
+    height: auto;
+    padding: 1.5rem 1.5rem 1rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .sidebar-inner {
+    height: auto;
+    gap: 1rem;
+  }
+
+  .logo {
+    margin-bottom: 1rem;
+  }
+
+  .nav {
+    margin-bottom: 1rem;
+  }
+
+  .content {
+    position: relative;      
+    width: 100%;
+    float: none;
+  }
+
+  .section {
+    min-height: auto;
+    padding: 3rem 1.5rem;
+  }
+
+  #intro {
+    padding: 1.5rem 0 2rem;
+  }
+
+  .section-inner {
+    padding-top: 2rem;
+  }
+
+  .section-inner p:first-of-type {
+    margin-top: 1.5rem;
+  }
+
+  .jamaica-title,
+  .title.regular,
+  .title.flores,
+  .title.sombra {
+    font-size: clamp(2.2rem, 8vw, 3rem);
+    margin-bottom: 3rem;
+  }
+
+  .grid {
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 3rem 0;
+  }
+
+  .grid .column,
+  .grid .left,
+  .grid .right {
+    width: 100%;
+    float: none;
+  }
+
+  h3 {
+    text-align: left;
+    margin-top: 0;
+  }
+
+  hr.divider {
+    width: 100%;
+    margin: 2rem 0;
+  }
+
+  .mySwiper {
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .mySwiper .swiper-slide {
+    width: 80vw;
+    height: 80vw;
+    max-width: 380px;
+    max-height: 380px;
+    margin: 0 auto;
+  }
+
+
+  #doc-container {
+    margin-top: 2rem;
+  }
+
+  #doc-container img {
+    border-radius: 8px;
+  }
+}
