@@ -38,29 +38,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const sections = Array.from(document.querySelectorAll("main .section"));
 
+  let lastScrollY = window.scrollY;
+
   function updateThemeByCenter() {
-    const viewportCenter = window.innerHeight / 2;
-    let closestSection = null;
-    let closestDistance = Infinity;
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
+    const scrollingUp = window.scrollY < lastScrollY;
 
-    sections.forEach((section) => {
-      const rect = section.getBoundingClientRect();
-      const sectionCenter = rect.top + rect.height / 2;
-      const distance = Math.abs(sectionCenter - viewportCenter);
+    const titleData = sections
+      .map((section) => {
+        const title = section.querySelector(".jamaica-title");
+        const rectSource = title || section; // fallback para secciones sin título (ej. #intro)
+        if (!rectSource) return null;
+        return { section, rect: rectSource.getBoundingClientRect() };
+      })
+      .filter(Boolean);
 
-      if (distance < closestDistance) {
-        closestDistance = distance;
-        closestSection = section;
-        console.log("section closest", section)
-      }
+    const fullyVisible = titleData.find(({ rect }) => {
+      const fullyInsideVertical = rect.top >= 0 && rect.bottom <= viewportHeight;
+      const fullyInsideHorizontal = rect.left >= 0 && rect.right <= viewportWidth;
+      return fullyInsideVertical && fullyInsideHorizontal;
     });
 
-    if (closestSection) {
-      const theme = closestSection.dataset.theme;
+    let target = fullyVisible;
+
+    // Si ningún título está totalmente visible, escogemos uno parcialmente visible.
+    // Al hacer scroll hacia arriba, priorizamos el que está entrando por arriba.
+    if (!target) {
+      const partiallyVisible = titleData.filter(({ rect }) => rect.bottom > 0 && rect.top < viewportHeight);
+
+      if (scrollingUp) {
+        const enteringFromTop = partiallyVisible
+          .filter(({ rect }) => rect.top < 0) // está arriba pero alcanzando el viewport
+          .sort((a, b) => b.rect.top - a.rect.top); // el más cercano al límite superior
+
+        target = enteringFromTop[0] || partiallyVisible[0];
+      } else {
+        // Scroll hacia abajo: elegimos el primero que aparece dentro del viewport.
+        target = partiallyVisible[0];
+      }
+    }
+
+    if (target) {
+      const theme = target.section.dataset.theme;
       if (theme) {
         document.body.setAttribute("data-theme", theme);
       }
     }
+
+    lastScrollY = window.scrollY;
   }
 
 
