@@ -137,6 +137,62 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- Estilos dinámicos para el documental ---
   injectDocStyles();
 
+  // --- Ocultar poster inmediatamente al hacer click y reproducir video ---
+  const docPoster = document.getElementById("doc-poster");
+  const docContainer = document.getElementById("doc-container");
+  
+  if (docPoster && docContainer) {
+    // Variable para rastrear si el usuario ya hizo click
+    let userClicked = false;
+    
+    docContainer.addEventListener("click", function(e) {
+      // Si el click es en la imagen o en el contenedor (pero no directamente en el iframe)
+      if (e.target === docPoster || e.target === docContainer) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        // Marcar que el usuario hizo click
+        userClicked = true;
+        
+        // Ocultar la imagen inmediatamente
+        docPoster.classList.add("hidden");
+        docPoster.style.pointerEvents = "none";
+        
+        // Intentar reproducir el video
+        const iframe = docContainer.querySelector("iframe");
+        if (iframe) {
+          // Si la API de YouTube está disponible, usar playVideo
+          if (youtubePlayer && typeof youtubePlayer.playVideo === 'function') {
+            try {
+              youtubePlayer.playVideo();
+            } catch (error) {
+              console.log("Error al reproducir con API, usando método alternativo");
+              // Si falla, usar el método del iframe
+              let src = iframe.getAttribute('src');
+              if (src && !src.includes('autoplay=1')) {
+                src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
+                iframe.setAttribute('src', src);
+              }
+            }
+          } else {
+            // Si la API no está lista, modificar el src del iframe para incluir autoplay
+            let src = iframe.getAttribute('src');
+            if (src && !src.includes('autoplay=1')) {
+              // Agregar autoplay=1 al src si no está presente
+              src += (src.includes('?') ? '&' : '?') + 'autoplay=1';
+              iframe.setAttribute('src', src);
+            }
+          }
+        }
+      }
+    });
+    
+    // Guardar la referencia para usar en onPlayerReady
+    window._userClickedDocPoster = function() {
+      return userClicked;
+    };
+  }
+
   // --- YouTube Player API (cargar después de load para no retrasar la vista) ---
   window.addEventListener("load", loadYouTubeAPI);
 });
@@ -166,18 +222,23 @@ window.onYouTubeIframeAPIReady = function () {
 // Cuando el reproductor está listo
 function onPlayerReady(event) {
   // El reproductor está listo, pero no se reproduce automáticamente
+  // Si la imagen ya está oculta (usuario hizo click antes de que cargara la API), reproducir
+  const docPoster = document.getElementById("doc-poster");
+  if (docPoster && (docPoster.classList.contains("hidden") || (window._userClickedDocPoster && window._userClickedDocPoster()))) {
+    // El usuario ya hizo click, reproducir el video
+    if (youtubePlayer && typeof youtubePlayer.playVideo === 'function') {
+      try {
+        youtubePlayer.playVideo();
+      } catch (error) {
+        console.log("Error al reproducir video:", error);
+      }
+    }
+  }
 }
 
 // Cuando cambia el estado del reproductor
 function onPlayerStateChange(event) {
-  const posterImg = document.getElementById("doc-poster");
-
-  // Estado 1 = PLAYING (reproduciendo)
-  if (event.data === YT.PlayerState.PLAYING) {
-    if (posterImg) {
-      posterImg.classList.add("hidden");
-    }
-  }
+  // Ya no ocultamos la imagen aquí, se oculta inmediatamente al hacer click
 }
 
 // Inicializar el reproductor si la API ya está cargada
@@ -214,13 +275,19 @@ function injectDocStyles() {
   const styleContent = `
     #doc-container img {
       transition: transform 1s ease-in-out, opacity 0.5s ease;
-      pointer-events: none;
+      pointer-events: auto;
       z-index: 2;
+      cursor: pointer;
     }
     #doc-container img.hidden {
       opacity: 0;
-      pointer-events: none;
+      pointer-events: none !important;
       transform: scale(.96);
+      z-index: 0;
+    }
+    #doc-container iframe {
+      position: relative;
+      z-index: 1;
     }`;
 
   const styleTag = document.createElement("style");
